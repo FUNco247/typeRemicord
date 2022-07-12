@@ -13,7 +13,7 @@ app.set("views", process.cwd() + "/src/views");
 app.use(morgan("dev")); // HTTP logger middleware
 app.use(express.json()); //built in middleware function in Express starting from v4.16.0. It parses incoming JSON requests and puts the parsed data in req.body.
 
-app.use("/clients", express.static("front"));
+app.use("/clients", express.static("dist"));
 
 app.use("/", rootRouter);
 app.use("/user", userRouter);

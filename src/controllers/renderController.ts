@@ -1,4 +1,4 @@
-import express, { RequestHandler } from "express";
+import { RequestHandler } from "express";
 
 export const renderHome: RequestHandler = (req, res) => {
   res.render("landingPage");
