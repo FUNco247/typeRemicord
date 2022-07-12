@@ -1,0 +1,26 @@
+extends ../base.pug
+
+block contents
+    if errorMessage
+        div.errorPopup
+            b.errMessage=errorMessage
+    div(id="input-box")
+        div
+            form(method="POST")
+                div.message
+                    small 레미코드는 개인정보를 요구하지 않습니다.
+                div.inputWrap
+                    label 아이디*
+                        input(placeholder="5자 ~ 15자 영문, 숫자*", name="username", type="text", required, minlength="5", maxlength="15", pattern="^([a-z0-9_]){5,15}$")
+                        span
+                    label 비밀번호*
+                        input(placeholder="8~20 영문, 숫자", name="password", type="password", required, minlength="8", maxlength="20", pattern="^([a-zA-Z0-9!@#$%^&*]){8,20}$")
+                        span
+                    label 비밀번호 확인*
+                        input(placeholder="위와 동일하게 입력", name="password2", type="password", required, minlength="8", maxlength="20", pattern="^([a-zA-Z0-9!@#$%^&*]){8,20}$")
+                    label 닉네임*
+                        input(placeholder="10자 이하", name="nickName", type="text", required, minlength="1", maxlength="10")
+                    div.submitBtn
+                        input(type="submit", value="회원가입")
+block scripts
+    script(src="/clients/js/join.js")
