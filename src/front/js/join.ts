@@ -3,7 +3,7 @@ interface IInput extends HTMLElement {
 }
 interface IUserDataJson {
   username: string;
-  passward: string;
+  password: string;
   nickname: string;
 }
 
@@ -13,7 +13,7 @@ const pwCheckInput: IInput = document.querySelector(".pwCheckInput")!;
 const nicknameInput: IInput = document.querySelector(".nicknameInput")!;
 const joinBtn: HTMLElement = document.querySelector(".joinBtn")!;
 
-const postJoinReq = (e: Event) => {
+const postJoinReq = async (e: Event) => {
   e.preventDefault();
   const pwValidCheck = pwInput.value === pwCheckInput.value;
   if (!pwValidCheck) {
@@ -21,19 +21,22 @@ const postJoinReq = (e: Event) => {
   } else {
     const postData: IUserDataJson = {
       username: idInput.value,
-      passward: pwInput.value,
+      password: pwInput.value,
       nickname: nicknameInput.value,
     };
     console.log(postData);
     try {
-      fetch("http://localhost:8282/user/join", {
+      const respone = await fetch("http://localhost:8282/user/join", {
         method: "POST",
         body: JSON.stringify(postData),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
+      const json = await respone.json();
+      console.log(json);
     } catch (error) {
+      console.log("에러다!!!");
       console.log(error);
     }
   }

@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, NextFunction, Response, Request } from "express";
 import morgan from "morgan";
 import "dotenv/config";
 import "./db";
@@ -17,6 +17,16 @@ app.use("/clients", express.static("dist"));
 
 app.use("/", rootRouter);
 app.use("/user", userRouter);
+
+app.use(function handleError(
+  error: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  console.log(error);
+  return res.json({ message: error.message });
+});
 
 const PORT = process.env.PORT;
 const handleListening = () =>
