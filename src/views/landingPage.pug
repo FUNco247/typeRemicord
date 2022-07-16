@@ -1,6 +1,20 @@
-extends base.pug
+extends ./base.pug
 
 block contents
-    
+    div.loginbox
+        div.login-input-wrap
+            if errorMessage
+            span.errMessage=errorMessage
+            form.login-form(method="POST")
+                input(placeholder="아이디", name="username", type="text", required)
+                input(placeholder="비밀번호", name="password", type="password", required)
+                div.submitBtn
+                    input(type="submit", class="loginBtn", value="로그인")
+                div.remember
+                    span
+                        input(type="checkbox", name="rememberMe")
+                        | 자동 로그인
+                    span 
+                        a(href="/user/findPW") 비밀번호 찾기
 
 block scripts 
