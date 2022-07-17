@@ -14,15 +14,13 @@ const nicknameInput = document.querySelector(
   ".nicknameInput"
 ) as HTMLInputElement | null;
 const joinBtn = document.querySelector(".joinBtn") as HTMLButtonElement;
-
-const username = idInput?.value;
-const password = pwInput?.value;
-const password2 = pwCheckInput?.value;
-const nickname = nicknameInput?.value;
-const pwValidCheck = password === password2;
+joinBtn.disabled = true;
 
 const disableBtn = () => {
-  console.log(password, password2);
+  const password = pwInput?.value;
+  const password2 = pwCheckInput?.value;
+  const pwValidCheck = password === password2;
+
   if (!pwValidCheck) {
     joinBtn.disabled = true;
     document.querySelector("span.pwValidCheck")!.innerHTML =
@@ -38,8 +36,10 @@ pwInput?.addEventListener("input", disableBtn);
 pwCheckInput?.addEventListener("input", disableBtn);
 
 const postJoinReq = async (e: Event) => {
+  const username = idInput?.value;
+  const password = pwInput?.value;
+  const nickname = nicknameInput?.value;
   e.preventDefault();
-  console.log(username);
   if (username && password && nickname) {
     const postData: IUserDataJson = {
       username,
@@ -48,20 +48,20 @@ const postJoinReq = async (e: Event) => {
     };
     console.log(postData);
     try {
-      const respone = await fetch("http://localhost:8282/user/join", {
+      const response = await fetch("http://localhost:8282/user/join", {
         method: "POST",
         body: JSON.stringify(postData),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
-      const json = await respone.json();
+      const json = await response.json();
       console.log(json);
     } catch (error) {
       console.log(error);
     }
   } else {
-    console.log("unValid JSON post");
+    console.log("Invalid JSON data posted");
   }
 };
 joinBtn.addEventListener("click", postJoinReq);

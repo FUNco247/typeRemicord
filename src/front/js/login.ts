@@ -1,6 +1,6 @@
 const loginForm = document.querySelector("form");
 
-const postLogin = (e: Event) => {
+const postLogin = async (e: Event) => {
   e.preventDefault();
   const usernameInput = document.querySelector(
     "input#username"
@@ -14,10 +14,26 @@ const postLogin = (e: Event) => {
     username,
     password,
   };
+  try {
+    const response = await fetch("http://localhost:8282/user/login", {
+      method: "POST",
+      body: JSON.stringify(postData),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const json = await response.json();
+    if (response.status === 200) {
+      location.href = "record";
+    } else {
+      const messageSpan = document.querySelector(
+        "span.errorMessage"
+      ) as HTMLElement;
+      messageSpan.innerHTML = json.message;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-if (loginForm) {
-  loginForm.addEventListener("submit", postLogin);
-} else {
-  console.log("can't find login form");
-}
+loginForm?.addEventListener("submit", postLogin);

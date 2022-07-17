@@ -8,8 +8,9 @@ block contents
             form.login-form(method="POST")
                 input(id="username" placeholder="아이디", name="username", type="text", required)
                 input(id="password" placeholder="비밀번호", name="password", type="password", required)
+                span(class="errorMessage")
                 div.submitBtn
-                    input(type="submit", class="loginBtn", value="로그인")
+                    button(type="submit", class="loginBtn") 로그인
                 div.remember
                     span
                         input(type="checkbox", name="rememberMe")
