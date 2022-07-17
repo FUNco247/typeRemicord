@@ -6,8 +6,8 @@ block contents
             if errorMessage
             span.errMessage=errorMessage
             form.login-form(method="POST")
-                input(placeholder="아이디", name="username", type="text", required)
-                input(placeholder="비밀번호", name="password", type="password", required)
+                input(id="username" placeholder="아이디", name="username", type="text", required)
+                input(id="password" placeholder="비밀번호", name="password", type="password", required)
                 div.submitBtn
                     input(type="submit", class="loginBtn", value="로그인")
                 div.remember
@@ -18,3 +18,4 @@ block contents
                         a(href="/user/findPW") 비밀번호 찾기
 
 block scripts 
+    script(src="/clients/front/js/login.js")

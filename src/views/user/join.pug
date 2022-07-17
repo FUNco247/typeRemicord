@@ -18,6 +18,7 @@ block contents
                         span
                     label 비밀번호 확인*
                         input(class="pwCheckInput" placeholder="위와 동일하게 입력", name="password2", type="password", required, minlength="8", maxlength="20", pattern="^([a-zA-Z0-9!@#$%^&*]){8,20}$")
+                        span(class="pwValidCheck")
                     label 닉네임*
                         input(class="nicknameInput" placeholder="10자 이하", name="nickName", type="text", required, minlength="1", maxlength="10")
                     div.submitBtn
