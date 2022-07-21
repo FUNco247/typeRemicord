@@ -6,24 +6,24 @@ header
                     a(href='/') 레미코드
                 span.logo for Mixer Truck Driver
             div.linkWtapper
-                if loggedIn
+                if logedIn
                     ul.navigation
                         li.parent
-                            a.link(class="link", href=`/record/write/${loggedInUser._id}`) 오늘의기록
+                            a.link(class="link", href=`/record/write/${logedInUser._id}`) 오늘의기록
                         li.parent
-                            a(class="link", href=`/record/edit/${loggedInUser._id}`) 기록수정
+                            a(class="link", href=`/record/edit/${logedInUser._id}`) 기록수정
                         li.parent
-                            a(class="link", href=`/record/history/${loggedInUser._id}`) 기간별조회
+                            a(class="link", href=`/record/history/${logedInUser._id}`) 기간별조회
                 else
                     ul.navigation
                         li.parent
                             a(class="link", href="/user/join") 회원가입
-        if loggedIn
+        if logedIn
             div.profileWrap
                 div
                     small
                         span
-                            a(class="link", href=`/user/edit/${loggedInUser._id}`) #{loggedInUser.name}
+                            a(class="link", href=`/user/edit/${logedInUser._id}`) #{logedInUser.nickname}
                             |님의 프로필
                         span
                             a(class="link", href="/user/logout") 로그아웃

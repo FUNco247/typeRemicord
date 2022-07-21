@@ -7,3 +7,7 @@ export const renderHome: RequestHandler = (req, res) => {
 export const renderJoin: RequestHandler = (req, res) => {
   res.render("user/join");
 };
+
+export const renderWriteRecord: RequestHandler = (req, res) => {
+  res.render("record/write");
+};

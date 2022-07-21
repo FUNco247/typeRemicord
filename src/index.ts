@@ -6,6 +6,8 @@ import "dotenv/config";
 import "./db";
 import { rootRouter } from "./routers/rootRouter";
 import { userRouter } from "./routers/userRouter";
+import { recordRouter } from "./routers/recordRouter";
+import { localsMiddleware } from "./middlewares";
 
 const app: Express = express();
 
@@ -31,9 +33,10 @@ app.use(
 );
 
 app.use("/clients", express.static("dist"));
-
+app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/user", userRouter);
+app.use("/record", recordRouter);
 
 app.use(function handleError(
   error: Error,

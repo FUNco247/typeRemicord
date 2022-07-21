@@ -1,18 +1,14 @@
 import { RequestHandler } from "express";
 import User from "../models/user";
 import bcrypt from "bcrypt";
-import session from "express-session";
 import { ObjectId } from "mongodb";
-
-interface IJoinUser {
-  username: string;
-  password: string;
-  nickname: string;
-}
-
 interface ILoginUser {
   username: string;
   password: string;
+}
+
+interface IJoinUser extends ILoginUser {
+  nickname: string;
 }
 
 export const joinApi: RequestHandler = async (req, res, next) => {
@@ -30,10 +26,14 @@ export const joinApi: RequestHandler = async (req, res, next) => {
   }
 };
 
+interface IDBUser extends IJoinUser {
+  _id: ObjectId;
+}
+
 declare module "express-session" {
   interface SessionData {
     logedIn: boolean;
-    user: ObjectId;
+    user: IDBUser;
   }
 }
 
@@ -55,7 +55,7 @@ export const loginApi: RequestHandler = async (req, res, next) => {
           .json({ message: "비밀번호가 일치하지 않습니다." });
       } else {
         req.session.logedIn = true;
-        req.session.user = existingUser._id;
+        req.session.user = existingUser;
         return res.status(200).json({ message: `환영합니다.` });
       }
     }
